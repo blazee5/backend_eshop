@@ -4,10 +4,11 @@
 	require "../inc/lib.inc.php";
 	require "../inc/config.inc.php";
 
-    $title = $_POST['title'];
-    $author = $_POST['author'];
+    $title = htmlspecialchars($_POST['title'] ?? '');
+    $author = htmlspecialchars($_POST['author'] ?? '');
     $pubyear = $_POST['pubyear'];
     $price = $_POST['price'];
+
     if (!addItemToCatalog($title, $author, $pubyear, $price)) {
         echo 'Произошла ошибка при добавлении товара';
     } else {
