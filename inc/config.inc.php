@@ -10,3 +10,5 @@ $link = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_NAME);
 if (!$link) {
     echo 'Ошибка: ' . mysqli_connect_errno() . ': ' . mysqli_connect_error();
 }
+
+basketInit();

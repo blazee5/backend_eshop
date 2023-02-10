@@ -25,3 +25,20 @@ function selectAllItems() {
         return $items;
     }
 }
+
+function saveBasket() {
+    global $basket;
+    $basket = base64_encode(serialize($basket));
+    setcookie('basket', $basket, 0x7FFFFFFF);
+}
+
+function basketInit() {
+    global $basket, $count;
+    if (!isset($_COOKIE['basket'])) {
+        $basket = ['orderid' => uniqid()];
+        saveBasket();
+    } else {
+        $basket = unserialize(base64_decode($_COOKIE['basket']));
+        $count = count($basket) - 1;
+    }
+}
