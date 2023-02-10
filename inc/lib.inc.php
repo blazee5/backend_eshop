@@ -75,3 +75,9 @@ function result2Array($data) {
   }
   return $arr;
 }
+
+function deleteItemFromBasket($id) {
+  global $basket;
+  unset($basket[$id]);
+  saveBasket();
+}

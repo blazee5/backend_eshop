@@ -13,7 +13,7 @@ global $basket;
 <body>
 <h1>Ваша корзина</h1>
 <?php
-if (count($basket) < 2) {
+if (count($basket) == 1) {
   echo "Корзина пуста! Вернитесь в " . "<a href='catalog.php'>каталог.</a>";
 } else {
   echo "Вернуться в " . "<a href='catalog.php'>каталог.</a>";
@@ -33,7 +33,7 @@ if (count($basket) < 2) {
     <th>Удалить</th>
   </tr>
   <?php
-  if (count($basket) > 2) {
+  if (count($basket) > 1) {
   foreach ($arr as $item) {
     $id = $item['id'];
     $sum += $item['price'] * $basket[$id];
@@ -46,7 +46,7 @@ if (count($basket) < 2) {
       <td><?= $item['pubyear'] ?></td>
       <td><?= $item['price'] ?></td>
       <td><?= $basket[$id] ?></td>
-      <td><a href="delete_from_basket.php?id=<?= $id ?>">Удалить</a></td>
+      <td><a href="delete_from_basket.php?id=<?= $item['id'] ?>">Удалить</a></td>
     </tr>
   <?php }
   }
@@ -54,7 +54,7 @@ if (count($basket) < 2) {
 </table>
 
 <p>Всего товаров в корзине на сумму: <?php
-  if (count($basket) > 2) {
+  if (count($basket) > 1) {
     echo $sum;
   }
   ?> руб.</p>
