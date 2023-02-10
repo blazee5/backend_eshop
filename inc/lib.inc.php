@@ -48,3 +48,30 @@ function add2Basket($id) {
   $basket[$id] = 1;
   saveBasket();
 }
+
+function myBasket() {
+  global $link, $basket;
+  $goods = array_keys($basket);
+  array_shift($goods);
+  if(!$goods) {
+    return false;
+  }
+  $ids = implode(",", $goods);
+  $sql = "SELECT id, author, title, pubyear, price FROM catalog WHERE id IN ($ids)";
+  if(!$result = mysqli_query($link, $sql)) {
+    return false;
+  }
+  $items = result2Array($result);
+  mysqli_free_result($result);
+  return $items;
+}
+
+function result2Array($data) {
+  global $basket;
+  $arr = [];
+  while ($row = mysqli_fetch_assoc($data)) {
+    $row['quantity'] = $basket[$row['id']];
+    $arr[] = $row;
+  }
+  return $arr;
+}
