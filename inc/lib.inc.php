@@ -42,3 +42,9 @@ function basketInit() {
         $count = count($basket) - 1;
     }
 }
+
+function add2Basket($id) {
+    global $basket;
+    $basket[$id] = 1;
+    saveBasket();
+}
