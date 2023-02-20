@@ -82,7 +82,7 @@ function deleteItemFromBasket($id) {
   saveBasket();
 }
 
-function saveOrder($datetime, $true) {
+function saveOrder($datetime) {
     global $link, $basket;
     $goods = myBasket();
     $stmt = mysqli_stmt_init($link);
@@ -100,5 +100,5 @@ function saveOrder($datetime, $true) {
     }
     mysqli_stmt_close($stmt);
     setcookie("basket", "", time()-3600);
-    return $true;
+    return true;
 }

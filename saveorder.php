@@ -12,6 +12,7 @@
     $order = $name . "|" . $email . "|" . $phone . "|" . $address . "|" . $id . "|" . $date . "\n";
 
     file_put_contents(ORDERS_LOG, $order, FILE_APPEND);
+    saveOrder($date);
 ?>
 <!DOCTYPE html>
 <html>
