@@ -1,6 +1,17 @@
 <?php
 	require "inc/lib.inc.php";
 	require "inc/config.inc.php";
+    global $basket;
+
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $id = $basket['id'];
+    $date = date("d.m.Y H:i:s");
+    $order = $name . "|" . $email . "|" . $phone . "|" . $address . "|" . $id . "|" . $date . "\n";
+
+    file_put_contents(ORDERS_LOG, $order, FILE_APPEND);
 ?>
 <!DOCTYPE html>
 <html>
