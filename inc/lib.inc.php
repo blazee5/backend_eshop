@@ -103,17 +103,17 @@ function saveOrder($datetime) {
     return true;
 }
 
-function getOrders() {
+function getOrders()
+{
     global $link;
-    if(!is_file(ORDERS_LOG))
+    if (!is_file(ORDERS_LOG))
         return false;
     /* Получаем в виде массива персональные данные пользователей из файла */
     $orders = file(ORDERS_LOG);
     /* Массив, который будет возвращен функцией */
     $allorders = [];
     foreach ($orders as $order) {
-        list($name, $email, $phone, $address, $orderid, $date) = explode("|",
-            $order);
+        list($name, $email, $phone, $address, $orderid, $date) = explode("|", $order);
         /* Промежуточный массив для хранения информации о конкретном заказе */
         $orderinfo = [];
         /* Сохранение информацию о конкретном пользователе */
@@ -124,11 +124,9 @@ function getOrders() {
         $orderinfo["orderid"] = $orderid;
         $orderinfo["date"] = $date;
         /* SQL-запрос на выборку из таблицы orders всех товаров для конкретного покупателя */
-        $sql = "SELECT title, author, pubyear, price, quantity
-        FROM orders
-        WHERE orderid = '$orderid' AND datetime = $date";
+        $sql = "SELECT title, author, pubyear, price, quantity FROM orders WHERE orderid = '$orderid' AND datetime = $date";
         /* Получение результата выборки */
-        if(!$result = mysqli_query($link, $sql))
+        if (!$result = mysqli_query($link, $sql))
             return false;
         $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
         mysqli_free_result($result);

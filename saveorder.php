@@ -7,11 +7,11 @@
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $address = $_POST['address'];
-    $id = $basket['id'];
-    $date = date("d.m.Y H:i:s");
+    $id = $basket['orderid'];
+    $date = time();
     $order = $name . "|" . $email . "|" . $phone . "|" . $address . "|" . $id . "|" . $date . "\n";
 
-    file_put_contents(ORDERS_LOG, $order, FILE_APPEND);
+    file_put_contents("admin/" . ORDERS_LOG, $order, FILE_APPEND);
     saveOrder($date);
 ?>
 <!DOCTYPE html>
