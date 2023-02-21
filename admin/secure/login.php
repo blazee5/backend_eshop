@@ -1,4 +1,33 @@
-<?
+<?php
+session_start();
+header("HTTP/1.0 401 Unauthorized");
+require_once "secure.inc.php";
+if($_SERVER['REQUEST_METHOD']=='POST'){
+    $login = trim(strip_tags($_POST["login"]));
+    $pw = trim(strip_tags($_POST["pw"]));
+    $ref = trim(strip_tags($_GET["ref"]));
+    if(!$ref)
+        $ref = '/backend_eshop/admin/';
+    if($login and $pw){
+        if($result = userExists($login)) {
+            list($_, $hash) = explode(':', $result);
+            if(checkHash($pw, trim($hash))) {
+                $_SESSION['admin'] = true;
+                header("Location: $ref");
+                exit;
+            } else {
+                echo 111;
+                $title = 'Неправильное имя пользователя или пароль!';
+            }
+        } else {
+            echo 222;
+            $title = 'Неправильное имя пользователя или пароль!';
+        }
+    } else {
+        echo 333;
+        $title = 'Заполните все поля формы!';
+    }
+}
 $title = 'Авторизация';
 $login  = '';
 ?>

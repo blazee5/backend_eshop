@@ -12,7 +12,7 @@ function checkHash($password, $hash){
 
 function saveUser($login, $hash){
     $str = "$login:$hash\n";
-    if(file_put_contents(FILE_NAME, $str, FILE_APPEND))
+    if(file_put_contents("./".FILE_NAME, $str, FILE_APPEND))
         return true;
     else
         return false;
@@ -27,4 +27,10 @@ function userExists($login){
             return $user;
     }
     return false;
+}
+
+function logOut(){
+    session_destroy();
+    header('Location: secure/login.php');
+    exit;
 }
